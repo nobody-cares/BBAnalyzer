@@ -1,0 +1,55 @@
+1. Never store credentials as code/ conﬁg in Bitbucket.
+Some good practices:
+• Block sensitive data being pushed to Bitbucket by adding git-secrets or a git pre-commit hook. • Break the build using the same tools when necessary. 
+• Audit for slipped secrets with BBAnalyzer. 
+• Connect to secret managers like Vault using Adaptavist’s ScriptRunner. 
+
+2. Removing sensitive data
+If sensitive data makes it to a repo:
+• Invalidate tokens and passwords. 
+• Remove the info and clear the Git history (force push rewrite history). 
+• Assess impact of leaked private info.
+ScriptRunner make these integrations simple.
+
+3. Tightly control access
+Failures in security are often the results of humans making poor decisions. Mandate the following practices for your contributors:
+• Require two-factor authentication for all your Bitbucket accounts. 
+• Never let developers share Bitbucket accounts/passwords. 
+• Properly secure any laptops/devices with access to your source code. 
+• Diligently revoke access from Bitbucket users who are no longer working with you.
+Manage team access to data. Give contributors only access to what they need to do their work.
+
+4. Add a SECURITY.md ﬁle
+You should include a SECURITY.md ﬁle that highlights security -related information for your project. This should contain:
+Disclosure policy Deﬁne the procedure that describes what a reporter needs to do in order to fully disclose a problem safely when a security issue is found, including who to contact and how. Consider HackerOne’s community edition or simply a ‘security@’ email.
+Security update policy Deﬁne how you intend to update project users about new security vulnerabilities as they are found.
+Security-related conﬁguration Deﬁne the settings that your project users should conﬁgure that impact the security posture of deploying this project, such as HTTPS, authorization and many others. 
+Known security gaps & future enhancements These are security improvements you haven’t gotten to yet.
+
+5. Validate Bitbucket apps
+Remember these apps are written by third-party developers, not Bitbucket. Validate:
+• The application access rights • The author/organization credibility 
+• How good the app’s security posture is—a breach gives attackers access to your code!
+Monitor changes in (2) and (3) over time, and keep on top of administering your applications. 
+
+6. Get security tips as part of your workﬂow with code insights
+Perform scans on all your open PRs using Bitbucket Code Insights. The Snyk integration provides detailed in-line annotations about the new vulnerabilities that each PR introduces.
+
+7. Add security testing to PRs
+Use Bitbucket hooks to check that your PRs don’t introduce new vulnerabilities: 
+• Snyk—dependency vuln testing 
+• SonarCloud—code quality testing 
+• CodeClimate—automated code reviews
+
+8. Add security testing in your Bitbucket pipes
+Add security-scanning pipes into your CI/CD ﬂow to ensure your automated pipelines do not contain security regressions: 
+• Snyk—dependency vuln testing 
+• SonarCloud—code quality testing
+
+9. Consider Bitbucket server
+If you don’t want anybody to have access to your code (even Atlassian), or if regulations require it, use the Bitbucket Server on-prem oﬀering.
+
+10. Rotate SSH keys and personal access tokens
+Bitbucket access is typically done using SSH keys or personal user tokens (in lieu of a password, because you enabled 2FA!). But what happens if those tokens are stolen and you didn’t know? 
+Be sure to refresh your keys and tokens periodically, mitigating any damage caused by keys that leaked out. 
+
